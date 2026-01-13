@@ -1,0 +1,10 @@
+^D:\DEMO\SUNNYLAND\BUILD\CMAKEFILES\5D4BA5EE2F7276BDE683821D64F54655\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/Demo/SunnyLand -BD:/Demo/SunnyLand/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Demo/SunnyLand/build/SunnyLand.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
