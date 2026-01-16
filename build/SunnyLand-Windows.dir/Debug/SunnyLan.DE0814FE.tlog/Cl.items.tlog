@@ -9,3 +9,4 @@ D:\Demo\SunnyLand\src\engine\resource\resource_manager.cpp;D:\Demo\SunnyLand\bui
 D:\Demo\SunnyLand\src\engine\render\camera.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\camera.obj
 D:\Demo\SunnyLand\src\engine\render\renderer.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\renderer.obj
 D:\Demo\SunnyLand\src\engine\input\input_manager.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\input_manager.obj
+D:\Demo\SunnyLand\src\engine\object\game_object.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\game_object.obj

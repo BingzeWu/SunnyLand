@@ -34,6 +34,9 @@
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\input\input_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\object\game_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\Demo\SunnyLand\CMakeLists.txt" />

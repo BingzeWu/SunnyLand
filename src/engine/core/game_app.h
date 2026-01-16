@@ -20,6 +20,7 @@ class InputManager;
 
 
 
+
 namespace engine::core {        // 命名空间的最佳实践：与文件路径一致
 class Time;
 class Config;
@@ -78,6 +79,7 @@ private:
     void testRenderer();
     void testCamera();
     void testInputManager();
+    void testGameObject();
 };
 
 } // namespace engine::core
