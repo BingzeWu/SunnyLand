@@ -5,11 +5,18 @@
 #include "../render/camera.h"
 #include "../input/input_manager.h"
 #include "../object/game_object.h"
+#include "../component/sprite_component.h"
+#include "../component/transform_component.h"
+#include "../scene/scene_manager.h"
+#include "../../game/scene/game_scene.h"
 #include "config.h"
+#include "context.h"
 #include <SDL3/SDL.h>
 #include <spdlog/spdlog.h>
 
 namespace engine::core {
+
+engine::object::GameObject game_object("test_game_object");
 
 GameApp::GameApp() = default;
 
@@ -50,15 +57,16 @@ bool GameApp::init() {
     if (!initRenderer()) return false;
     if (!initCamera()) return false;
     if (!initInputManager()) return false;
+    if (!initContext()) return false;
+    if (!initSceneManager()) return false;
 
 
-    // 测试资源管理器
-    testResourceManager();
+    // 创建第一个场景并压入栈
+    auto scene = std::make_unique<game::scene::GameScene>("GameScene", *context_, *scene_manager_);
+    scene_manager_->requestPushScene(std::move(scene));
 
     is_running_ = true;
     spdlog::trace("GameApp 初始化成功。");
-    // 测试 GameObject
-    testGameObject();
     return true;
 }
 
@@ -69,12 +77,12 @@ void GameApp::handleEvents() {
         return;
     }
     
-    testInputManager();
+    scene_manager_->handleInput();
 }
 
-void GameApp::update(float /* delta_time */) {
+void GameApp::update(float  delta_time ) {
     // 游戏逻辑更新
-    testCamera();
+    scene_manager_->update(delta_time);
 }
 
 void GameApp::render() {
@@ -82,7 +90,7 @@ void GameApp::render() {
     renderer_->clearScreen();
 
     // 2. 具体渲染代码
-    testRenderer();
+    scene_manager_->render();
 
     // 3. 更新屏幕显示
     renderer_->present();
@@ -205,6 +213,35 @@ bool GameApp::initInputManager()
     return true;   
 }
 
+bool GameApp::initContext()
+{
+    try {
+        context_ = std::make_unique<engine::core::Context>(
+            *input_manager_,
+            *renderer_,
+            *camera_,
+            *resource_manager_
+        );
+    } catch (const std::exception& e) {
+        spdlog::error("初始化上下文失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("上下文初始化成功。");
+    return true;
+}
+
+bool GameApp::initSceneManager()
+{
+    try {
+        scene_manager_ = std::make_unique<engine::scene::SceneManager>(*context_);
+    } catch (const std::exception& e) {
+        spdlog::error("初始化场景管理器失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("场景管理器初始化成功。");
+    return true;
+}
+
 // --- 测试用函数 ---
 
 void GameApp::testResourceManager()
@@ -272,8 +309,23 @@ void GameApp::testInputManager()
 
 void GameApp::testGameObject()
 {
-    engine::object::GameObject game_object("test_game_object");
-    game_object.addComponent<engine::component::Component>();
+    spdlog::info("========== 测试组件系统 ==========");
+    // 1. 添加 TransformComponent，让对象出现在 (100, 100)
+    game_object.addComponent<engine::component::TransformComponent>(
+        glm::vec2(100.0f, 100.0f)
+    );
+    // 2. 添加 SpriteComponent，显示箱子贴图，设置渲染中心为图片的几何中心
+    game_object.addComponent<engine::component::SpriteComponent>(
+        "assets/textures/Props/big-crate.png",
+        *resource_manager_,
+        engine::utils::Alignment::CENTER
+    );
+    // 3. 获取 TransformComponent，修改缩放和旋转
+    game_object.getComponent<engine::component::TransformComponent>()->setScale(glm::vec2(2.0f, 2.0f));  // 放大 2 倍
+    game_object.getComponent<engine::component::TransformComponent>()->setRotation(30.0f);                // 旋转 30 度
+    spdlog::info("✓ Transform 组件配置完成");
+
+    spdlog::info("====================================");
 }
 
 } // namespace engine::core

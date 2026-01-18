@@ -329,6 +329,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\core\game_app.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\core\config.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\core\time.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\core\context.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\resource\texture_manager.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\resource\font_manager.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\resource\audio_manager.cpp" />
@@ -337,6 +338,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\render\renderer.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\input\input_manager.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\object\game_object.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\sprite_component.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\transform_component.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\parallax_component.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene_manager.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\game\scene\game_scene.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\level_loader.cpp" />
     <Natvis Include="C:\library\nlohmann_json\nlohmann_json.natvis">
     </Natvis>
   </ItemGroup>

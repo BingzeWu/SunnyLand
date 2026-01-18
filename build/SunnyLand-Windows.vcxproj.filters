@@ -13,6 +13,9 @@
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\core\time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\core\context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\resource\texture_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -35,6 +38,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\object\game_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\sprite_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\transform_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\parallax_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\game\scene\game_scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\level_loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
