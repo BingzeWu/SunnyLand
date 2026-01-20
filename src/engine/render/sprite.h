@@ -21,6 +21,11 @@ private:
 
 public:
     /**
+     * @brief 默认构造函数，创建一个空精灵。
+     */
+    Sprite() = default;
+    
+    /**
      * @brief 构造一个精灵
      *
      * @param texture_id 纹理资源的标识符。不应为空。

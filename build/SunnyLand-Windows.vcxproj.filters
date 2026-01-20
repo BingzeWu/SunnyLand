@@ -49,6 +49,9 @@
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\parallax_component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\tilelayer_component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

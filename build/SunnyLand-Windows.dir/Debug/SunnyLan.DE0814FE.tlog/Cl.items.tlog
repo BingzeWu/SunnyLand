@@ -14,6 +14,7 @@ D:\Demo\SunnyLand\src\engine\object\game_object.cpp;D:\Demo\SunnyLand\build\Sunn
 D:\Demo\SunnyLand\src\engine\component\sprite_component.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\sprite_component.obj
 D:\Demo\SunnyLand\src\engine\component\transform_component.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\transform_component.obj
 D:\Demo\SunnyLand\src\engine\component\parallax_component.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\parallax_component.obj
+D:\Demo\SunnyLand\src\engine\component\tilelayer_component.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\tilelayer_component.obj
 D:\Demo\SunnyLand\src\engine\scene\scene_manager.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\scene_manager.obj
 D:\Demo\SunnyLand\src\engine\scene\scene.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\scene.obj
 D:\Demo\SunnyLand\src\game\scene\game_scene.cpp;D:\Demo\SunnyLand\build\SunnyLand-Windows.dir\Debug\game_scene.obj

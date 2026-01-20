@@ -23,7 +23,11 @@ SDL_Texture* TextureManager::loadTexture(const std::string& file_path) {
 
     // 如果没加载则尝试加载纹理
     SDL_Texture* raw_texture = IMG_LoadTexture(renderer_, file_path.c_str());
-
+    // 设置纹理缩放模式为最邻近插值(去除白边)
+    if (!SDL_SetTextureScaleMode(raw_texture, SDL_SCALEMODE_NEAREST)) {
+        spdlog::warn("无法设置纹理缩放模式为最邻近插值");
+        }
+    // 检查加载是否成功
     if (!raw_texture) {
         spdlog::error("加载纹理失败: '{}': {}", file_path, SDL_GetError());
         return nullptr;

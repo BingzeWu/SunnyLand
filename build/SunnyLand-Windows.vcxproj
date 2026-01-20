@@ -341,6 +341,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\sprite_component.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\transform_component.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\parallax_component.cpp" />
+    <ClCompile Include="D:\Demo\SunnyLand\src\engine\component\tilelayer_component.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene_manager.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\engine\scene\scene.cpp" />
     <ClCompile Include="D:\Demo\SunnyLand\src\game\scene\game_scene.cpp" />

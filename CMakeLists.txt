@@ -47,6 +47,7 @@ add_executable(
     src/engine/component/sprite_component.cpp
     src/engine/component/transform_component.cpp 
     src/engine/component/parallax_component.cpp 
+    src/engine/component/tilelayer_component.cpp
     src/engine/scene/scene_manager.cpp
     src/engine/scene/scene.cpp
     src/game/scene/game_scene.cpp
