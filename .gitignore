@@ -1,0 +1,7 @@
+# IDE
+.vscode/
+# build
+build/
+# Executables
+*.exe
+*.pdb
