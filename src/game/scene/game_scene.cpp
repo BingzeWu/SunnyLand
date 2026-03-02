@@ -11,6 +11,7 @@
 #include "../../engine/component/physics_component.h"
 #include "../../engine/component/collider_component.h"
 #include "../../engine/component/tilelayer_component.h"
+#include "../../engine/component/animation_component.h"
 #include <spdlog/spdlog.h>
 #include <SDL3/SDL_rect.h>
 
@@ -40,6 +41,11 @@ void GameScene::init() {
         context_.getInputManager().setShouldQuit(true);
         return;
     }
+    if (!initEnemiesAndItems()) {
+        spdlog::error("敌人和物品初始化失败，无法继续。");
+        context_.getInputManager().setShouldQuit(true);
+        return;
+    }
     Scene::init();
     spdlog::trace("GameScene 初始化完成。");
 }
@@ -54,6 +60,7 @@ void GameScene::render() {
 
 void GameScene::handleInput() {
     Scene::handleInput();
+    testHealth();  // 测试生命值组件    
 }
 
 void GameScene::clean() {
@@ -119,6 +126,47 @@ bool GameScene::initPlayer()
     context_.getCamera().setTarget(player_transform);
     spdlog::trace("Player初始化完成。");
     return true;
+}
+
+bool GameScene::initEnemiesAndItems()
+{
+    bool success = true;
+    for (auto& game_object : game_objects_){
+        if (game_object->getName() == "eagle"){
+            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
+                ac->playAnimation("fly");
+            } else { spdlog::error("Eagle 没有 AnimationComponent 组件"); success = false; }
+        }
+        if (game_object->getName() == "frog"){
+            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
+                ac->playAnimation("idle");
+            } else { spdlog::error("Frog 没有 AnimationComponent 组件"); success = false; }
+        }
+        if (game_object->getName() == "opossum"){
+            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
+                ac->playAnimation("walk");
+            } else { spdlog::error("Opossum 没有 AnimationComponent 组件"); success = false; }
+        }
+        if (game_object->getName() == "fruit"){
+            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
+                ac->playAnimation("idle");
+            } else { spdlog::error("Fruit 没有 AnimationComponent 组件"); success = false; }
+        }
+        if (game_object->getName() == "gem"){
+            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
+                ac->playAnimation("idle");
+            } else { spdlog::error("Gem 没有 AnimationComponent 组件"); success = false; }
+        }
+    }
+    return success;
+}
+
+void GameScene::testHealth()
+{
+    auto input_manager = context_.getInputManager();
+    if (input_manager.isActionPressed("attack")) {
+        player_->getComponent<game::component::PlayerComponent>()->takeDamage(1);
+    }
 }
 
 } // namespace game::scene

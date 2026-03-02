@@ -1,13 +1,19 @@
 #include "player_component.h"
 #include "state/idle_state.h"
+#include "state/hurt_state.h"
+#include "state/dead_state.h"
 #include "../../engine/component/transform_component.h"
 #include "../../engine/component/physics_component.h"
 #include "../../engine/component/sprite_component.h"
+#include "../../engine/component/animation_component.h"
+#include "../../engine/component/health_component.h"
+//#include "../../engine/component/audio_component.h"
 #include "../../engine/object/game_object.h"
 #include "../../engine/input/input_manager.h"
 #include <utility>
 #include <typeinfo>
 #include <spdlog/spdlog.h>
+#include <glm/common.hpp>
 
 namespace game::component {
 
@@ -21,9 +27,11 @@ void PlayerComponent::init() {
     transform_component_ = owner_->getComponent<engine::component::TransformComponent>();
     physics_component_ = owner_->getComponent<engine::component::PhysicsComponent>();
     sprite_component_ = owner_->getComponent<engine::component::SpriteComponent>();
+    animation_component_ = owner_->getComponent<engine::component::AnimationComponent>();
+    health_component_ = owner_->getComponent<engine::component::HealthComponent>();
 
     // 检查必要组件是否存在
-    if (!transform_component_ || !physics_component_ || !sprite_component_) {
+    if (!transform_component_ || !physics_component_ || !sprite_component_ || !animation_component_ || !health_component_) {
         spdlog::error("Player 对象缺少必要组件！");
     }
 
@@ -37,7 +45,29 @@ void PlayerComponent::init() {
     spdlog::debug("PlayerComponent 初始化完成。");
 }
 
-void PlayerComponent::setState(std::unique_ptr<state::PlayerState> new_state) {
+bool PlayerComponent::takeDamage(int damage_amount)
+{
+    if (is_dead_ || !health_component_ || damage_amount <= 0) {
+        return false;
+    }
+
+    bool success = health_component_->takeDamage(damage_amount);
+    if (!success) return false;
+    
+    // --- 成功造成伤害了，根据是否存活决定状态切换
+    if (health_component_->isAlive()) {
+        // 切换到受伤状态
+        setState(std::make_unique<state::HurtState>(this));
+    } else {
+        is_dead_ = true;
+        // 切换到死亡状态
+        setState(std::make_unique<state::DeadState>(this));
+    }
+    return true;
+}
+
+void PlayerComponent::setState(std::unique_ptr<state::PlayerState> new_state)
+{
     if (!new_state) {
         spdlog::warn("尝试设置空的玩家状态！");
         return;
@@ -49,7 +79,6 @@ void PlayerComponent::setState(std::unique_ptr<state::PlayerState> new_state) {
     current_state_ = std::move(new_state);
     spdlog::debug("玩家组件正在切换到状态: {}", typeid(*current_state_).name());
     current_state_->enter();
-
 }
 
 void PlayerComponent::handleInput(engine::core::Context& context) {

@@ -133,7 +133,7 @@ void PhysicsEngine::resolveTileCollisions(engine::component::PhysicsComponent* p
     if (!obj) return;
     auto* tc = obj->getComponent<engine::component::TransformComponent>();
     auto* cc = obj->getComponent<engine::component::ColliderComponent>();
-    if (!tc || !cc || !cc->isActive() || cc->isTrigger()) return;
+    if (!tc || !cc  || cc->isTrigger()) return;
     auto world_aabb = cc->getWorldAABB();   // 使用最小包围盒进行碰撞检测（简化）
     auto obj_pos = world_aabb.position;
     auto obj_size = world_aabb.size;
@@ -143,6 +143,12 @@ void PhysicsEngine::resolveTileCollisions(engine::component::PhysicsComponent* p
     auto tolerance = 1.0f;          // 检查右边缘和下边缘时，需要减1像素，否则会检查到下一行/列的瓦片
     auto ds = pc->velocity_ * delta_time;  // 计算物体在delta_time内的位移
     auto new_obj_pos = obj_pos + ds;        // 计算物体在delta_time后的新位置
+
+    if (!cc->isActive()){
+        tc->translate(ds); // 先移动物体到新位置，后续如果检测到碰撞再调整位置
+        pc->velocity_ = glm::clamp(pc->velocity_, -max_speed_, max_speed_); // 限制最大速度
+        return;
+    }
 
     // 遍历所有注册的碰撞瓦片层
     for (auto* layer : collision_tile_layers_) {

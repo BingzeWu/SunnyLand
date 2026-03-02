@@ -22,6 +22,7 @@ protected:
 public:
     PlayerState(PlayerComponent* player_component) : player_component_(player_component) {}
     virtual ~PlayerState() = default;
+    void playAnimation(const std::string& animation_name);   ///< @brief 播放指定名称的动画
 
     // 禁止拷贝和移动
     PlayerState(const PlayerState&) = delete;

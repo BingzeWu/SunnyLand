@@ -42,6 +42,7 @@ add_executable(
     src/engine/resource/resource_manager.cpp 
     src/engine/render/camera.cpp 
     src/engine/render/renderer.cpp 
+    src/engine/render/animation.cpp 
     src/engine/input/input_manager.cpp 
     src/engine/object/game_object.cpp 
     src/engine/component/sprite_component.cpp
@@ -50,17 +51,22 @@ add_executable(
     src/engine/component/tilelayer_component.cpp
     src/engine/component/physics_component.cpp 
     src/engine/component/collider_component.cpp 
+    src/engine/component/animation_component.cpp
+    src/engine/component/health_component.cpp  
     src/engine/scene/scene_manager.cpp
     src/engine/scene/scene.cpp
     src/engine/scene/level_loader.cpp 
     src/engine/physics/physics_engine.cpp 
     src/engine/physics/collision.cpp 
     src/game/scene/game_scene.cpp 
+    src/game/component/state/player_state.cpp 
     src/game/component/player_component.cpp 
     src/game/component/state/jump_state.cpp 
     src/game/component/state/walk_state.cpp 
     src/game/component/state/fall_state.cpp 
-    src/game/component/state/idle_state.cpp
+    src/game/component/state/idle_state.cpp 
+    src/game/component/state/hurt_state.cpp 
+    src/game/component/state/dead_state.cpp 
     )
 
 # 链接库
