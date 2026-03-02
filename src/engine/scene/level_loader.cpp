@@ -219,6 +219,10 @@ void LevelLoader::loadObjectLayer(const nlohmann::json& layer_json, Scene& scene
             if (tag) {
                 game_object->setTag(tag.value());
             }
+            // 如果是危险瓦片，设置标签为 "hazard"，方便后续游戏逻辑处理
+            else if (tile_info.type == engine::component::TileType::HAZARD) {
+                game_object->setTag("hazard");
+            }
 
             // 获取重力信息并设置
             auto gravity = getTileProperty<bool>(tile_json, "gravity");
@@ -347,6 +351,10 @@ engine::component::TileType LevelLoader::getTileType(const nlohmann::json &tile_
                 if (slope_type == "2_0") return engine::component::TileType::SLOPE_2_0;
                 if (slope_type == "1_2") return engine::component::TileType::SLOPE_1_2;
                 if (slope_type == "2_1") return engine::component::TileType::SLOPE_2_1;
+            }
+            else if (property.contains("name") && property["name"] == "hazard") {
+                auto is_hazard = property.value("value", false);
+                return is_hazard ? engine::component::TileType::HAZARD : engine::component::TileType::NORMAL;
             }
             // TODO: 可以在这里添加更多的自定义属性处理逻辑
         }

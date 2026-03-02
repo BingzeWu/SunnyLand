@@ -30,6 +30,7 @@ enum class TileType
     SLOPE_0_1, SLOPE_1_0, ///< @brief tan=1度坡度
     SLOPE_0_2, SLOPE_2_1, ///< @brief tan=2度坡度,从左往右（2代表1/2）
     SLOPE_1_2, SLOPE_2_0, ///< @brief tan=2度坡度，从右往左（2代表1/2）
+    HAZARD,     ///< @brief 危险瓦片（例如火焰、尖刺等）
     // 其他类型...
 };
 

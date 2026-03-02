@@ -1,6 +1,7 @@
 #pragma once
 #include "../../engine/scene/scene.h"
 #include <memory>
+#include <glm/vec2.hpp>
 
 // 前置声明
 namespace engine::object {
@@ -27,6 +28,7 @@ public:
 
     // 游戏逻辑处理方法
     void handleObjectCollisions();  ///< @brief 处理场景中游戏对象之间的碰撞
+    void handleTileTriggers(); ///< @brief 处理场景中瓦片触发事件
     void playerVSEnemyCollision(engine::object::GameObject* player, engine::object::GameObject* enemy);  ///< @brief 玩家与敌人碰撞处理
     void playerVSItemCollision(engine::object::GameObject* player, engine::object::GameObject* item);    ///< @brief 玩家与道具碰撞处理
 
