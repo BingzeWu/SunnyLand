@@ -59,14 +59,18 @@ add_executable(
     src/engine/physics/physics_engine.cpp 
     src/engine/physics/collision.cpp 
     src/game/scene/game_scene.cpp 
-    src/game/component/state/player_state.cpp 
     src/game/component/player_component.cpp 
+    src/game/component/state/player_state.cpp 
     src/game/component/state/jump_state.cpp 
     src/game/component/state/walk_state.cpp 
     src/game/component/state/fall_state.cpp 
     src/game/component/state/idle_state.cpp 
     src/game/component/state/hurt_state.cpp 
     src/game/component/state/dead_state.cpp 
+    src/game/component/ai_component.cpp 
+    src/game/component/ai/patrol_behavior.cpp 
+    src/game/component/ai/updown_behavior.cpp 
+    src/game/component/ai/jump_behavior.cpp
     )
 
 # 链接库

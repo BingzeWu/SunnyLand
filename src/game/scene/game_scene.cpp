@@ -1,5 +1,9 @@
 #include "game_scene.h"
 #include "../component/player_component.h"
+#include "../component/ai_component.h"
+#include "../component/ai/patrol_behavior.h"
+#include "../component/ai/updown_behavior.h"
+#include "../component/ai/jump_behavior.h"
 #include "../../engine/scene/level_loader.h"
 #include "../../engine/input/input_manager.h"
 #include "../../engine/render/camera.h"
@@ -137,19 +141,25 @@ bool GameScene::initEnemiesAndItems()
     bool success = true;
     for (auto& game_object : game_objects_){
         if (game_object->getName() == "eagle"){
-            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
-                ac->playAnimation("fly");
-            } else { spdlog::error("Eagle 没有 AnimationComponent 组件"); success = false; }
+            if (auto* ai_component = game_object->addComponent<game::component::AIComponent>(); ai_component){
+                auto y_max = game_object->getComponent<engine::component::TransformComponent>()->getPosition().y;
+                auto y_min = y_max - 80.0f;  // 让鹰的飞行范围 (当前位置与上方80像素 的区域)
+                ai_component->setBehavior(std::make_unique<game::component::ai::UpDownBehavior>(y_min, y_max));
+            } else { spdlog::error("Eagle 无法添加 AIComponent 组件"); success = false; }
         }
         if (game_object->getName() == "frog"){
-            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
-                ac->playAnimation("idle");
-            } else { spdlog::error("Frog 没有 AnimationComponent 组件"); success = false; }
+            if (auto* ai_component = game_object->addComponent<game::component::AIComponent>(); ai_component){
+                auto x_max = game_object->getComponent<engine::component::TransformComponent>()->getPosition().x - 10.0f;
+                auto x_min = x_max - 90.0f;
+                ai_component->setBehavior(std::make_unique<game::component::ai::JumpBehavior>(x_min, x_max));
+            } else { spdlog::error("Frog 无法添加 AIComponent 组件"); success = false; }
         }
         if (game_object->getName() == "opossum"){
-            if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
-                ac->playAnimation("walk");
-            } else { spdlog::error("Opossum 没有 AnimationComponent 组件"); success = false; }
+            if (auto* ai_component = game_object->addComponent<game::component::AIComponent>(); ai_component){
+                auto x_max = game_object->getComponent<engine::component::TransformComponent>()->getPosition().x;
+                auto x_min = x_max - 100.0f;
+                ai_component->setBehavior(std::make_unique<game::component::ai::PatrolBehavior>(x_min, x_max));
+            } else { spdlog::error("Opossum 无法添加 AIComponent 组件"); success = false; }
         }
         if (game_object->getName() == "fruit"){
             if (auto* ac = game_object->getComponent<engine::component::AnimationComponent>(); ac){
