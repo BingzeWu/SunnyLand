@@ -42,6 +42,7 @@ private:
     float friction_factor_ = 0.85f;   ///< @brief 摩擦系数 (Idle时缓冲效果，每帧乘以此系数)
     float jump_force_ = 350.0f;       ///< @brief 跳跃力 (按下"jump"键给的瞬间向上的力)
     float stunned_duration_ = 0.4f;   ///< @brief 受伤后硬直时间（秒）
+    float climb_speed_ = 100.0f;      ///< @brief 爬梯子速度 (像素/秒)
 
 public:
     PlayerComponent() = default;
@@ -73,6 +74,8 @@ public:
     float getJumpForce() const { return jump_force_; }      ///< @brief 获取跳跃力
     void setStunnedDuration(float duration) { stunned_duration_ = duration; }  ///< @brief 设置硬直时间
     float getStunnedDuration() const { return stunned_duration_; }       ///< @brief 获取硬直时间
+    void setClimbSpeed(float climb_speed) { climb_speed_ = climb_speed; }   ///< @brief 设置爬梯子速度
+    float getClimbSpeed() const { return climb_speed_; }             ///< @brief 获取爬梯子速度
 
     void setState(std::unique_ptr<state::PlayerState> new_state);       ///< @brief 切换玩家状态
     

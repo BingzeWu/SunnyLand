@@ -241,6 +241,21 @@ void PhysicsEngine::resolveTileCollisions(engine::component::PhysicsComponent* p
                 pc->velocity_.y = 0.0f;
                 pc->setCollidedBelow(true);
             }
+            else if (tile_type_left == engine::component::TileType::LADDER && tile_type_right == engine::component::TileType::LADDER) {
+                auto tile_type_up_l = layer->getTileTypeAt({tile_x, tile_y - 1});
+                auto tile_type_up_r = layer->getTileTypeAt({tile_x_right, tile_y - 1});
+                // 如果脚下是梯子，但头顶不是梯子，证明处在梯子顶层
+                if (tile_type_up_r != engine::component::TileType::LADDER && tile_type_up_l != engine::component::TileType::LADDER) {
+                // 如果当前是正常物理状态（非攀爬）
+                    if (pc->isUseGravity()) {
+                    pc->setIsOnTopLadder(true);       // 设置在梯子顶层标志
+                    pc->setCollidedBelow(true);     // 伪造一个下方碰撞，让玩家站住
+                    // 将玩家位置对齐到梯子顶部
+                    new_obj_pos.y = tile_y * layer->getTileSize().y - obj_size.y;
+                    pc->velocity_.y = 0.0f;
+                    }
+                }
+            }
             else {
                 // 处理斜坡碰撞
                 // 检测斜坡瓦片（下方两个角点都要检测）
@@ -393,6 +408,10 @@ void PhysicsEngine::checkTileTriggers()
                     // 未来可以添加更多触发器类型的瓦片，目前只有 HAZARD 类型
                     if (tile_type == engine::component::TileType::HAZARD) {
                         triggers_set.insert(tile_type);     // 记录触发事件，set 保证每个瓦片类型只记录一次
+                    }
+                    // 梯子类型的瓦片,不需要记录到触发事件集合中，因为它不属于一次性的触发事件，而是一个持续的状态
+                    else if (tile_type == engine::component::TileType::LADDER) {
+                        pc->setCollidedLadder(true);
                     }
                 }
             }

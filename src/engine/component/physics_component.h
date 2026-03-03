@@ -32,6 +32,8 @@ private:
     bool collided_above_ = false;
     bool collided_left_ = false;
     bool collided_right_ = false;
+    bool collided_ladder_ = false;
+    bool is_on_top_ladder_ = false;   ///< @brief 是否在梯子顶层 
 
 public:
     /**
@@ -65,19 +67,25 @@ public:
         collided_above_ = false;
         collided_left_ = false;
         collided_right_ = false;
+        collided_ladder_ = false;
+        is_on_top_ladder_ = false;
     }
+
+        // 设置器/获取器
     void setCollidedBelow(bool collided) { collided_below_ = collided; }    ///< @brief 设置下方碰撞标志
     void setCollidedAbove(bool collided) { collided_above_ = collided; }    ///< @brief 设置上方碰撞标志
     void setCollidedLeft(bool collided) { collided_left_ = collided; }      ///< @brief 设置左方碰撞标志
     void setCollidedRight(bool collided) { collided_right_ = collided; }    ///< @brief 设置右方碰撞标志
+    void setCollidedLadder(bool collided) { collided_ladder_ = collided; }  ///< @brief 设置梯子碰撞标志
+    void setIsOnTopLadder(bool is_on_top) { is_on_top_ladder_ = is_on_top; } ///< @brief 设置是否在梯子顶层 
 
     bool hasCollidedBelow() const { return collided_below_; }       ///< @brief 检查是否与下方发生碰撞
     bool hasCollidedAbove() const { return collided_above_; }       ///< @brief 检查是否与上方发生碰撞
     bool hasCollidedLeft() const { return collided_left_; }         ///< @brief 检查是否与左方发生碰撞
     bool hasCollidedRight() const { return collided_right_; }       ///< @brief 检查是否与右方发生碰撞
+    bool hasCollidedLadder() const { return collided_ladder_; }     ///< @brief 检查是否与梯子发生碰撞
+    bool isOnTopLadder() const { return is_on_top_ladder_; }        ///< @brief 检查是否在梯子顶层 
 
-
-    // 设置器/获取器
     void setEnabled(bool enabled) { enabled_ = enabled; }                       ///< @brief 设置组件是否启用
     void setMass(float mass) { mass_ = (mass >= 0.0f) ? mass : 1.0f; }          ///< @brief 设置质量，质量不能为负
     void setUseGravity(bool use_gravity) { use_gravity_ = use_gravity; }        ///< @brief 设置组件是否受重力影响

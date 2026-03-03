@@ -2,10 +2,12 @@
 #include "fall_state.h"
 #include "jump_state.h"
 #include "walk_state.h"
+#include "climb_state.h"
 #include "../player_component.h"
 #include "../../../engine/core/context.h"
 #include "../../../engine/input/input_manager.h"
 #include "../../../engine/component/physics_component.h"
+#include "../../../engine/component/transform_component.h"
 #include <spdlog/spdlog.h>
 
 namespace game::component::state {
@@ -21,6 +23,20 @@ void IdleState::exit() {
 std::unique_ptr<PlayerState> IdleState::handleInput(engine::core::Context& context)
 {
     auto input_manager = context.getInputManager();
+    auto physics_component = player_component_->getPhysicsComponent();
+
+    // 如果按下了上键且与梯子发生碰撞，则切换到 ClimbState
+    if (physics_component->hasCollidedLadder() && input_manager.isActionDown("move_up")) {
+        return std::make_unique<ClimbState>(player_component_);
+    }
+
+    // 如果按下"move_down"且在梯子顶层，则切换到 ClimbState
+    if (physics_component->isOnTopLadder() && input_manager.isActionDown("move_down")) {
+        // 需要向下移动一点，确保下一帧能与梯子碰撞（否则会切换回FallState）
+        player_component_->getTransformComponent()->translate(glm::vec2(0, 2.0f));
+        return std::make_unique<ClimbState>(player_component_);
+    }
+    
     // 如果按下了左右移动键，则切换到 WalkState
     if (input_manager.isActionDown("move_left") || input_manager.isActionDown("move_right")) {
         return std::make_unique<WalkState>(player_component_);

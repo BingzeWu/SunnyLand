@@ -67,6 +67,7 @@ add_executable(
     src/game/component/state/idle_state.cpp 
     src/game/component/state/hurt_state.cpp 
     src/game/component/state/dead_state.cpp 
+    src/game/component/state/climb_state.cpp 
     src/game/component/ai_component.cpp 
     src/game/component/ai/patrol_behavior.cpp 
     src/game/component/ai/updown_behavior.cpp 

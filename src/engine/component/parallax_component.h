@@ -33,13 +33,12 @@ public:
      */
     ParallaxComponent(const std::string& texture_id, const glm::vec2& scroll_factor, const glm::bvec2& repeat);
 
-    // --- 设置器 ---
+    // --- setters/getters ---
     void setSprite(const engine::render::Sprite& sprite) { sprite_ = sprite; }  ///< @brief 设置精灵对象
     void setScrollFactor(const glm::vec2& factor) { scroll_factor_ = factor; }  ///< @brief 设置滚动速度因子
     void setRepeat(const glm::bvec2& repeat) { repeat_ = repeat; }              ///< @brief 设置是否重复
     void setHidden(bool hidden) { is_hidden_ = hidden; }                        ///< @brief 设置是否隐藏（不渲染）
 
-    // --- 获取器 ---
     const engine::render::Sprite& getSprite() const { return sprite_; }          ///< @brief 获取精灵对象
     const glm::vec2& getScrollFactor() const { return scroll_factor_; }          ///< @brief 获取滚动速度因子
     const glm::bvec2& getRepeat() const { return repeat_; }                      ///< @brief 获取是否重复
