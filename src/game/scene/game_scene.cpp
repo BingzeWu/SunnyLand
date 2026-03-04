@@ -246,8 +246,11 @@ void GameScene::playerVSEnemyCollision(engine::object::GameObject *player, engin
     if (overlap.x > overlap.y && player_center.y < enemy_center.y) {    
         spdlog::info("玩家 {} 踩踏了敌人 {}", player->getName(), enemy->getName());
         auto enemy_health = enemy->getComponent<engine::component::HealthComponent>();
-        if (!enemy_health) { /* ... */ return; }
-
+        context_.getAudioPlayer().playSound("assets/audio/punch2a.mp3");
+        if (!enemy_health) { 
+            spdlog::error("敌人 {} 没有 HealthComponent 组件，无法处理踩踏伤害", enemy->getName());
+            return; 
+        }
         enemy_health->takeDamage(1);  // 造成1点伤害
         if (!enemy_health->isAlive()) {
             enemy->setNeedRemove(true);  // 标记敌人为待删除状态
@@ -272,6 +275,7 @@ void GameScene::playerVSItemCollision(engine::object::GameObject *player, engine
     item->setNeedRemove(true);  // 标记道具为待删除状态
     auto item_aabb = item->getComponent<engine::component::ColliderComponent>()->getWorldAABB();
     createEffect(item_aabb.position + item_aabb.size / 2.0f, item->getTag());  // 创建特效
+    context_.getAudioPlayer().playSound("assets/audio/poka01.mp3");
 }
 
 void GameScene::createEffect(const glm::vec2 &center_pos, const std::string &tag)
