@@ -45,6 +45,7 @@ add_executable(
     src/engine/render/animation.cpp 
     src/engine/input/input_manager.cpp 
     src/engine/object/game_object.cpp 
+    src/engine/audio/audio_player.cpp 
     src/engine/component/sprite_component.cpp
     src/engine/component/transform_component.cpp 
     src/engine/component/parallax_component.cpp 
@@ -53,6 +54,7 @@ add_executable(
     src/engine/component/collider_component.cpp 
     src/engine/component/animation_component.cpp
     src/engine/component/health_component.cpp  
+    src/engine/component/audio_component.cpp 
     src/engine/scene/scene_manager.cpp
     src/engine/scene/scene.cpp
     src/engine/scene/level_loader.cpp 

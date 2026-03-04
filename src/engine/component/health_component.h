@@ -12,7 +12,7 @@ private:
     int max_health_ = 1;
     int current_health_ = 1;
     bool is_invincible_ = false;            ///< @brief 是否处于无敌状态
-    float invincibility_duration_ = 2.0f;   ///< @brief 受伤后无敌的总时长（秒）
+    float invincibility_duration_ = 0.5f;   ///< @brief 受伤后无敌的总时长（秒）
     float invincibility_timer_ = 0.0f;      ///< @brief 无敌时间计时器（秒）
 
 public:

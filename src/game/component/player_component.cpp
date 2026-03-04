@@ -7,7 +7,7 @@
 #include "../../engine/component/sprite_component.h"
 #include "../../engine/component/animation_component.h"
 #include "../../engine/component/health_component.h"
-//#include "../../engine/component/audio_component.h"
+#include "../../engine/component/audio_component.h"
 #include "../../engine/object/game_object.h"
 #include "../../engine/input/input_manager.h"
 #include <utility>
@@ -29,9 +29,10 @@ void PlayerComponent::init() {
     sprite_component_ = owner_->getComponent<engine::component::SpriteComponent>();
     animation_component_ = owner_->getComponent<engine::component::AnimationComponent>();
     health_component_ = owner_->getComponent<engine::component::HealthComponent>();
+    audio_component_ = owner_->getComponent<engine::component::AudioComponent>();
 
     // 检查必要组件是否存在
-    if (!transform_component_ || !physics_component_ || !sprite_component_ || !animation_component_ || !health_component_) {
+    if (!transform_component_ || !physics_component_ || !sprite_component_ || !animation_component_ || !health_component_ || !audio_component_) {
         spdlog::error("Player 对象缺少必要组件！");
     }
 
@@ -66,6 +67,14 @@ bool PlayerComponent::takeDamage(int damage_amount)
     return true;
 }
 
+bool PlayerComponent::isOnGround() const
+{
+    // 满足以下任一条件，都算在"地面"上：
+    // 1. 离地时间仍在土狼时间窗口内
+    // 2. 物理上确实接触着地面
+    return coyote_timer_ <= coyote_time_ || physics_component_->hasCollidedBelow();
+}
+
 void PlayerComponent::setState(std::unique_ptr<state::PlayerState> new_state)
 {
     if (!new_state) {
@@ -93,6 +102,31 @@ void PlayerComponent::handleInput(engine::core::Context& context) {
 void PlayerComponent::update(float delta_time, engine::core::Context& context) {
     if (!current_state_) return;
 
+    // 如离开地面则启动土狼计时器
+    if (!isOnGround()) {
+        coyote_timer_ += delta_time;
+    } else {
+        coyote_timer_ = 0.0f;
+    }
+    
+    // 如果处于无敌状态，则进行闪烁
+    if (health_component_->isInvincible()) {
+        flash_timer_ += delta_time;         // 闪烁计时器增加
+        if (flash_timer_ >= 2 * flash_interval_) {
+            flash_timer_ -= 2 * flash_interval_;    // 闪烁计时器在 0～2倍闪烁间隔 中循环
+        }
+        // 一半时间可见，一半时间不可见。
+        if (flash_timer_ < flash_interval_) {
+            sprite_component_->setHidden(true);
+        } else {
+            sprite_component_->setHidden(false);
+        }
+    }
+    // 非无敌状态时确保精灵可见
+    else if (sprite_component_->isHidden()) {
+        sprite_component_->setHidden(false);
+    }
+    
     auto next_state = current_state_->update(delta_time, context);
     if (next_state) {
         setState(std::move(next_state));

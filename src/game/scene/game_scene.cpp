@@ -11,6 +11,7 @@
 #include "../../engine/physics/physics_engine.h"
 #include "../../engine/core/context.h"
 #include "../../engine/object/game_object.h"
+#include "../../engine/audio/audio_player.h"
 #include "../../engine/component/transform_component.h"
 #include "../../engine/component/sprite_component.h"
 #include "../../engine/component/physics_component.h"
@@ -52,6 +53,14 @@ void GameScene::init() {
         context_.getInputManager().setShouldQuit(true);
         return;
     }
+    //设置音量
+    context_.getAudioPlayer().setMusicVolume(0.2f);
+    context_.getAudioPlayer().setSoundVolume(0.5f);
+    //播放背景音乐
+    if (!context_.getAudioPlayer().playMusic("assets/audio/hurry_up_and_run.ogg", true, 1000)) {
+        spdlog::error("无法播放背景音乐");
+    }
+
     Scene::init();
     spdlog::trace("GameScene 初始化完成。");
 }

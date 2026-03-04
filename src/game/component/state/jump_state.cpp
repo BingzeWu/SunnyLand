@@ -8,6 +8,7 @@
 #include "../../../engine/input/input_manager.h"
 #include "../../../engine/component/physics_component.h"
 #include "../../../engine/component/sprite_component.h"
+#include "../../../engine/component/audio_component.h"
 #include <glm/common.hpp>
 #include <spdlog/spdlog.h>
 
@@ -16,6 +17,11 @@ namespace game::component::state {
 void JumpState::enter() {
     auto physics_component = player_component_->getPhysicsComponent();
     physics_component->velocity_.y = -player_component_->getJumpForce(); // 向上跳跃
+    
+    if (auto* audio_component = player_component_->getAudioComponent(); audio_component) {
+        audio_component->playSound("jump");  // 播放跳跃音效
+    }
+    
     spdlog::debug("PlayerComponent 进入 JumpState，设置初始垂直速度为: {}", physics_component->velocity_.y);
 }
 

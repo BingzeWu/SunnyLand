@@ -12,6 +12,7 @@ namespace engine::component {
     class SpriteComponent;
     class AnimationComponent;
     class HealthComponent;
+    class AudioComponent;
 }
 
 namespace game::component::state {
@@ -32,6 +33,7 @@ private:
     engine::component::PhysicsComponent* physics_component_ = nullptr; 
     engine::component::AnimationComponent* animation_component_ = nullptr;
     engine::component::HealthComponent* health_component_ = nullptr;
+    engine::component::AudioComponent* audio_component_ = nullptr;
 
     std::unique_ptr<state::PlayerState> current_state_;
     bool is_dead_ = false;
@@ -43,6 +45,12 @@ private:
     float jump_force_ = 350.0f;       ///< @brief 跳跃力 (按下"jump"键给的瞬间向上的力)
     float stunned_duration_ = 0.4f;   ///< @brief 受伤后硬直时间（秒）
     float climb_speed_ = 100.0f;      ///< @brief 爬梯子速度 (像素/秒)
+    // 土狼时间(Coyote Time): 允许玩家在离地后短暂时间内仍然可以跳跃
+    static constexpr float coyote_time_ = 0.15f;   ///< @brief 土狼时间（秒）
+    float coyote_timer_ = 0.0f;           ///< @brief 土狼计时器，在玩家离地时开始计时
+    // 无敌闪烁时间
+    static constexpr float flash_interval_ = 0.1f;  ///< @brief 闪烁间隔时间（单位：秒）
+    float flash_timer_ = 0.0f;                      ///< @brief 闪烁计时器
 
 public:
     PlayerComponent() = default;
@@ -60,6 +68,7 @@ public:
     engine::component::PhysicsComponent* getPhysicsComponent() const { return physics_component_; }
     engine::component::AnimationComponent* getAnimationComponent() const { return animation_component_; }
     engine::component::HealthComponent* getHealthComponent() const { return health_component_; }
+    engine::component::AudioComponent* getAudioComponent() const { return audio_component_; }
 
     void setIsDead(bool is_dead) { is_dead_ = is_dead; }           ///< @brief 设置玩家是否死亡
     bool isDead() const { return is_dead_; }                       ///< @brief 获取玩家是否死亡    
@@ -76,6 +85,7 @@ public:
     float getStunnedDuration() const { return stunned_duration_; }       ///< @brief 获取硬直时间
     void setClimbSpeed(float climb_speed) { climb_speed_ = climb_speed; }   ///< @brief 设置爬梯子速度
     float getClimbSpeed() const { return climb_speed_; }             ///< @brief 获取爬梯子速度
+    bool isOnGround() const;   ///< @brief 获取玩家是否在地面上
 
     void setState(std::unique_ptr<state::PlayerState> new_state);       ///< @brief 切换玩家状态
     

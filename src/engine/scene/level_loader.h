@@ -9,6 +9,7 @@
 namespace engine::component {
 class AnimationComponent;
 class HealthComponent;
+class AudioComponent;
 struct TileInfo;
 enum class TileType;
 }
@@ -123,6 +124,8 @@ private:
      * @return std::string 解析后的完整路径。
      */
     std::string resolvePath(const std::string& relative_path, const std::string& file_path);
+
+    void addSound(const nlohmann::json& sound_json, engine::component::AudioComponent* audio_component);   ///< @brief 从json数据中解析声音信息并添加到AudioComponent中
 };
 
 } // namespace engine::scene
