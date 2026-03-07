@@ -33,7 +33,7 @@ void PhysicsComponent::init() {
 }
 
 void PhysicsComponent::clean() 
-{
+{   
     physics_engine_->unregisterComponent(this);
     spdlog::trace("物理组件清理完成。");
 }

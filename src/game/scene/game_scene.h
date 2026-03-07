@@ -8,16 +8,24 @@ namespace engine::object {
     class GameObject;
 }
 
+namespace game::data {
+    class SessionData;
+}
+
 namespace game::scene {
 
 /**
  * @brief 主要的游戏场景，包含玩家、敌人、关卡元素等。
  */
 class GameScene final: public engine::scene::Scene {
+    // 场景间共享数据，因此用shared_ptr
+    std::shared_ptr<game::data::SessionData> game_session_data_; ///< @brief 游戏会话数据，包含玩家状态、得分等, 跨场景共享
     engine::object::GameObject* player_ = nullptr;  ///< @brief 保存玩家对象的指针，方便访问
 
 public:
-    GameScene(std::string name, engine::core::Context& context, engine::scene::SceneManager& scene_manager);
+    GameScene(engine::core::Context& context, 
+              engine::scene::SceneManager& scene_manager, 
+              std::shared_ptr<game::data::SessionData> data = nullptr);
 
     // 覆盖场景基类的核心方法
     void init() override;
@@ -29,8 +37,10 @@ public:
     // 游戏逻辑处理方法
     void handleObjectCollisions();  ///< @brief 处理场景中游戏对象之间的碰撞
     void handleTileTriggers(); ///< @brief 处理场景中瓦片触发事件
+    void handlePlayerDamage(int damage); ///< @brief 处理玩家受伤逻辑
     void playerVSEnemyCollision(engine::object::GameObject* player, engine::object::GameObject* enemy);  ///< @brief 玩家与敌人碰撞处理
     void playerVSItemCollision(engine::object::GameObject* player, engine::object::GameObject* item);    ///< @brief 玩家与道具碰撞处理
+    bool isPlayerDropOut(engine::object::GameObject* player); ///< @brief 处理玩家掉落出场景的逻辑
 
     /**
      * @brief 创建一个特效对象（一次性）。
@@ -43,7 +53,13 @@ private:
     [[nodiscard]] bool initLevel();               ///< @brief 初始化关卡
     [[nodiscard]] bool initPlayer();              ///< @brief 初始化玩家
     [[nodiscard]] bool initEnemiesAndItems();             ///< @brief 初始化敌人
-    void testHealth();                      ///< @brief 测试 HealthComponent 的功能
+    /// @brief 根据关卡名称获取对应的地图文件路径
+    std::string levelNameToPath(const std::string& level_name) const { 
+        return "assets/maps/" + level_name + ".tmj"; 
+    }
+    bool toNextLevel(engine::object::GameObject* trigger); ///< @brief 处理进入下一关的逻辑
+    bool loadLevel(const std::string& map_path); ///< @brief 加载关卡地图
+
 };
 
 } // namespace game::scene

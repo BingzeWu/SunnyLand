@@ -55,9 +55,17 @@ void TileLayerComponent::render(engine::core::Context& context) {
     }
 }
 
+void TileLayerComponent::clean()
+{
+    if (physics_engine_){
+        physics_engine_->unregisterCollisionLayer(this);
+    }
+}
+
 const TileInfo* TileLayerComponent::getTileInfoAt(glm::ivec2 pos) const {
     if (pos.x < 0 || pos.x >= map_size_.x || pos.y < 0 || pos.y >= map_size_.y) {
         spdlog::warn("TileLayerComponent: 瓦片坐标越界: ({}, {})", pos.x, pos.y);
+    
         return nullptr;
     }
     size_t index = static_cast<size_t>(pos.y * map_size_.x + pos.x);

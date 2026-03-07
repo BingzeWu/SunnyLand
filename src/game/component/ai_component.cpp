@@ -26,7 +26,7 @@ void AIComponent::init() {
     audio_component_ = owner_->getComponent<engine::component::AudioComponent>();
 
     // 检查是否所有必需的组件都存在
-    if (!transform_component_ || !physics_component_ || !sprite_component_ || !animation_component_ || !audio_component_) {
+    if (!transform_component_ || !physics_component_ || !sprite_component_ || !animation_component_ ) {
         spdlog::error("GameObject '{}' 上的 AIComponent 缺少必需的组件", owner_->getName());
     }
 }

@@ -61,6 +61,7 @@ add_executable(
     src/engine/physics/physics_engine.cpp 
     src/engine/physics/collision.cpp 
     src/game/scene/game_scene.cpp 
+    src/game/data/session_data.cpp 
     src/game/component/player_component.cpp 
     src/game/component/state/player_state.cpp 
     src/game/component/state/jump_state.cpp 
