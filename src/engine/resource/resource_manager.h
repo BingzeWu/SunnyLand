@@ -65,9 +65,9 @@ public:
     void clearMusic();                                          ///< @brief 清空所有音乐资源
 
     // -- Fonts --
-    TTF_Font* loadFont(const std::string& file_path, int point_size);     ///< @brief 载入字体资源
-    TTF_Font* getFont(const std::string& file_path, int point_size);      ///< @brief 尝试获取已加载字体的指针，如果未加载则尝试加载
-    void unloadFont(const std::string& file_path, int point_size);        ///< @brief 卸载指定的字体资源
+    TTF_Font* loadFont(std::string_view file_path, int point_size);     ///< @brief 载入字体资源
+    TTF_Font* getFont(std::string_view file_path, int point_size);      ///< @brief 尝试获取已加载字体的指针，如果未加载则尝试加载
+    void unloadFont(std::string_view file_path, int point_size);        ///< @brief 卸载指定的字体资源
     void clearFonts(); 
 };
 

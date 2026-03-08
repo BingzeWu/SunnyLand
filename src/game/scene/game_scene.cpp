@@ -11,6 +11,7 @@
 #include "../../engine/input/input_manager.h"
 #include "../../engine/render/camera.h"
 #include "../../engine/render/animation.h"
+#include "../../engine/render/text_renderer.h"
 #include "../../engine/physics/physics_engine.h"
 #include "../../engine/core/context.h"
 #include "../../engine/object/game_object.h"
@@ -22,6 +23,9 @@
 #include "../../engine/component/tilelayer_component.h"
 #include "../../engine/component/animation_component.h"
 #include "../../engine/component/health_component.h"
+#include "../../engine/ui/ui_manager.h"
+//#include "../../engine/ui/ui_label.h"
+#include "../../engine/ui/ui_panel.h"
 #include <spdlog/spdlog.h>
 #include <SDL3/SDL_rect.h>
 
@@ -63,6 +67,10 @@ void GameScene::init()
         context_.getInputManager().setShouldQuit(true);
         return;
     }
+    if (!initUI()) {
+        spdlog::error("UI初始化失败...");
+        return;
+    }
     //设置音量
     context_.getAudioPlayer().setMusicVolume(0.2f);
     context_.getAudioPlayer().setSoundVolume(0.5f);
@@ -91,6 +99,7 @@ void GameScene::update(float delta_time) {
 
 void GameScene::render() {
     Scene::render();
+    testTextRenderer(); // 在渲染循环中调用
 }
 
 void GameScene::handleInput() {
@@ -179,6 +188,19 @@ bool GameScene::initEnemiesAndItems()
     return success;
 }
 
+bool GameScene::initUI()
+{
+    if (!ui_manager_->init(glm::vec2(640.0f, 360.0f))) return false;
+    
+    // 创建一个半透明的红色UIPanel
+    ui_manager_->addElement(std::make_unique<engine::ui::UIPanel>(
+        glm::vec2(100.0f, 100.0f), 
+        glm::vec2(200.0f, 200.0f), 
+        engine::utils::FColor{0.5f, 0.0f, 0.0f, 0.3f} // RGBA
+    ));
+    return true;
+}
+
 bool GameScene::toNextLevel(engine::object::GameObject *trigger)
 {
     // 从触发器对象的名字获取下一关的场景名
@@ -231,6 +253,18 @@ bool GameScene::loadLevel(const std::string &map_path)
     // 设置世界边界
     context_.getPhysicsEngine().setWorldBounds(engine::utils::Rect(glm::vec2(0.0f), world_size));
     return true;
+}
+
+void GameScene::testTextRenderer()
+{
+    auto& text_renderer = context_.getTextRenderer();
+    const auto& camera = context_.getCamera();
+    
+    // 1. 渲染UI文本 (绿色)
+    text_renderer.drawUIText("UI Text", "assets/fonts/VonwaonBitmap-16px.ttf", 32, glm::vec2(100.0f), {0, 1.0f, 0, 1.0f});
+    
+    // 2. 渲染世界文本 (默认白色)
+    text_renderer.drawText(camera, "Map Text", "assets/fonts/VonwaonBitmap-16px.ttf", 32, glm::vec2(200.0f));
 }
 
 void GameScene::handleObjectCollisions()

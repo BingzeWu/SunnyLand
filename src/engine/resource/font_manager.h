@@ -61,9 +61,9 @@ public:
 
 private: // 仅由 ResourceManager（和内部）访问的方法
 
-    TTF_Font* loadFont(const std::string& file_path, int point_size);     ///< @brief 从文件路径加载指定点大小的字体
-    TTF_Font* getFont(const std::string& file_path, int point_size);      ///< @brief 尝试获取已加载字体的指针，如果未加载则尝试加载
-    void unloadFont(const std::string& file_path, int point_size);        ///< @brief 卸载特定字体（通过路径和大小标识）
+    TTF_Font* loadFont(std::string_view file_path, int point_size);     ///< @brief 从文件路径加载指定点大小的字体
+    TTF_Font* getFont(std::string_view file_path, int point_size);      ///< @brief 尝试获取已加载字体的指针，如果未加载则尝试加载
+    void unloadFont(std::string_view file_path, int point_size);        ///< @brief 卸载特定字体（通过路径和大小标识）
     void clearFonts();                                                    ///< @brief 清空所有缓存的字体
 };
 

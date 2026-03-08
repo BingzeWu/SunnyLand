@@ -4,6 +4,7 @@
 #include "../audio/audio_player.h"
 #include "../render/renderer.h"
 #include "../render/camera.h"
+#include "../render/text_renderer.h"
 #include "../input/input_manager.h"
 #include "../object/game_object.h"
 #include "../physics/physics_engine.h"
@@ -57,6 +58,7 @@ bool GameApp::init() {
     if (!initResourceManager()) return false;
     if (!initRenderer()) return false;
     if (!initCamera()) return false;
+    if (!initTextRenderer()) return false;
     if (!initAudioPlayer()) return false;
     if (!initInputManager()) return false;
     if (!initPhysicsEngine()) return false; 
@@ -155,6 +157,8 @@ bool GameApp::initSDL()
 
     // 设置逻辑分辨率为窗口大小的一半（针对像素游戏）
     SDL_SetRenderLogicalPresentation(sdl_renderer_, config_->window_width_ / 2, config_->window_height_ / 2, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+    // 设置渲染器支持透明色
+    SDL_SetRenderDrawBlendMode(sdl_renderer_, SDL_BLENDMODE_BLEND);
     spdlog::trace("SDL 初始化成功。");
     return true;
 }
@@ -216,6 +220,18 @@ bool GameApp::initCamera() {
     return true;
 }
 
+bool GameApp::initTextRenderer()
+{
+    try{
+        text_renderer_ = std::make_unique<engine::render::TextRenderer>(sdl_renderer_, resource_manager_.get());
+    } catch (const std::exception& e) {
+        spdlog::error("初始化文本渲染器失败: {}", e.what());
+        return false;
+    }
+    spdlog::trace("文本渲染器初始化成功。");
+    return true;
+}
+
 bool GameApp::initInputManager()
 {
     try {
@@ -242,16 +258,20 @@ bool GameApp::initPhysicsEngine()
 
 bool GameApp::initContext()
 {
-    try {
+    try 
+    {
         context_ = std::make_unique<engine::core::Context>(
             *input_manager_,
             *renderer_,
             *camera_,
+            *text_renderer_,
             *resource_manager_,
             *physics_engine_,
             *audio_player_
-        );
-    } catch (const std::exception& e) {
+            );
+    } 
+    catch (const std::exception& e) 
+    {
         spdlog::error("初始化上下文失败: {}", e.what());
         return false;
     }

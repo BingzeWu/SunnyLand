@@ -12,6 +12,11 @@ namespace game::data {
     class SessionData;
 }
 
+namespace engine::ui {
+class UIlabel;
+class UIPanel;
+}
+
 namespace game::scene {
 
 /**
@@ -52,13 +57,15 @@ public:
 private:
     [[nodiscard]] bool initLevel();               ///< @brief 初始化关卡
     [[nodiscard]] bool initPlayer();              ///< @brief 初始化玩家
-    [[nodiscard]] bool initEnemiesAndItems();             ///< @brief 初始化敌人
+    [[nodiscard]] bool initEnemiesAndItems();             ///< @brief 初始化敌人和道具
+    [[nodiscard]] bool initUI(); ///< @brief 初始化用户界面
     /// @brief 根据关卡名称获取对应的地图文件路径
     std::string levelNameToPath(const std::string& level_name) const { 
         return "assets/maps/" + level_name + ".tmj"; 
     }
     bool toNextLevel(engine::object::GameObject* trigger); ///< @brief 处理进入下一关的逻辑
     bool loadLevel(const std::string& map_path); ///< @brief 加载关卡地图
+    void testTextRenderer(); ///< @brief 测试文本渲染器
 
 };
 

@@ -42,6 +42,7 @@ add_executable(
     src/engine/resource/resource_manager.cpp 
     src/engine/render/camera.cpp 
     src/engine/render/renderer.cpp 
+    src/engine/render/text_renderer.cpp 
     src/engine/render/animation.cpp 
     src/engine/input/input_manager.cpp 
     src/engine/object/game_object.cpp 
@@ -60,6 +61,9 @@ add_executable(
     src/engine/scene/level_loader.cpp 
     src/engine/physics/physics_engine.cpp 
     src/engine/physics/collision.cpp 
+    src/engine/ui/ui_manager.cpp 
+    src/engine/ui/ui_element.cpp 
+    src/engine/ui/ui_panel.cpp 
     src/game/scene/game_scene.cpp 
     src/game/data/session_data.cpp 
     src/game/component/player_component.cpp 

@@ -159,10 +159,20 @@ void Renderer::clearScreen() {
     }
 }
 
+void Renderer::drawUIFilledRect(const engine::utils::Rect &rect, const engine::utils::FColor &color)
+{    
+    setDrawColorFloat(color.r, color.g, color.b, color.a);
+    if (!SDL_RenderFillRect(renderer_, reinterpret_cast<const SDL_FRect*>(&rect))) {
+        spdlog::error("绘制填充矩形失败：{}", SDL_GetError());
+    }
+    setDrawColorFloat(0, 0, 0, 1.0f);
+}
+
 void Renderer::present()
 {
     SDL_RenderPresent(renderer_);
 }
+
 
 std::optional<SDL_FRect> Renderer::getSpriteSrcRect(const Sprite &sprite)
 {

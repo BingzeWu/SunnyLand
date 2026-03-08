@@ -24,6 +24,10 @@ namespace engine::core{
     class Context;
 }
 
+namespace engine::ui{
+    class UIManager;
+}
+
 namespace engine::scene {
     class SceneManager;
 
@@ -41,6 +45,7 @@ protected:
     bool is_initialized_ = false;                       ///< @brief 场景是否已初始化(非当前场景很可能未被删除，因此需要初始化标志避免重复初始化)
     std::vector<std::unique_ptr<engine::object::GameObject>> game_objects_;         ///< @brief 场景中的游戏对象
     std::vector<std::unique_ptr<engine::object::GameObject>> pending_additions_;    ///< @brief 待添加的游戏对象（延时添加）
+    std::unique_ptr<engine::ui::UIManager> ui_manager_;     ///< @brief 场景的UI管理器
 
 public:
     /**

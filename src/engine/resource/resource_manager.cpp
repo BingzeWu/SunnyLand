@@ -85,21 +85,20 @@ void ResourceManager::clearMusic() {
 }
 
 // --- 字体接口实现 ---
-TTF_Font* ResourceManager::loadFont(const std::string& file_path, int point_size) {
+TTF_Font* ResourceManager::loadFont(std::string_view file_path, int point_size) {
     return font_manager_->loadFont(file_path, point_size);
 }
 
-TTF_Font* ResourceManager::getFont(const std::string& file_path, int point_size) {
+TTF_Font* ResourceManager::getFont(std::string_view file_path, int point_size) {
     return font_manager_->getFont(file_path, point_size);
 }
 
-void ResourceManager::unloadFont(const std::string& file_path, int point_size) {
+void ResourceManager::unloadFont(std::string_view file_path, int point_size) {
     font_manager_->unloadFont(file_path, point_size);
 }
 
 void ResourceManager::clearFonts() {
     font_manager_->clearFonts();
 }
-
 
 }// namespace engine::resource
