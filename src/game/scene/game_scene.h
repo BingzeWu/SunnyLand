@@ -15,6 +15,8 @@ namespace game::data {
 namespace engine::ui {
 class UIlabel;
 class UIPanel;
+class UIImage;
+class UILabel;
 }
 
 namespace game::scene {
@@ -26,6 +28,9 @@ class GameScene final: public engine::scene::Scene {
     // 场景间共享数据，因此用shared_ptr
     std::shared_ptr<game::data::SessionData> game_session_data_; ///< @brief 游戏会话数据，包含玩家状态、得分等, 跨场景共享
     engine::object::GameObject* player_ = nullptr;  ///< @brief 保存玩家对象的指针，方便访问
+    // UI元素生命周期由UIManager管理，因此使用裸指针缓存
+    engine::ui::UIPanel* health_panel_ = nullptr;   ///< @brief 显示玩家生命值的标签
+    engine::ui::UILabel* score_label_ = nullptr;    ///< @brief 显示玩家得分的标签
 
 public:
     GameScene(engine::core::Context& context, 
@@ -65,7 +70,11 @@ private:
     }
     bool toNextLevel(engine::object::GameObject* trigger); ///< @brief 处理进入下一关的逻辑
     bool loadLevel(const std::string& map_path); ///< @brief 加载关卡地图
-    void testTextRenderer(); ///< @brief 测试文本渲染器
+    // ui相关方法
+    void createHealthUI(); ///< @brief 创建玩家生命值UI
+    void createScoreUI(); ///< @brief 创建玩家得分UI
+    void addScoreWithUI(int score); ///< @brief 增加分数并更新UI显示
+    void updateHealthWithUI(); ///< @brief 更新玩家生命值UI显示
 
 };
 
