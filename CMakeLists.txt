@@ -66,6 +66,11 @@ add_executable(
     src/engine/ui/ui_panel.cpp 
     src/engine/ui/ui_image.cpp 
     src/engine/ui/ui_label.cpp 
+    src/engine/ui/ui_interactive.cpp 
+    src/engine/ui/ui_button.cpp 
+    src/engine/ui/state/ui_normal_state.cpp
+    src/engine/ui/state/ui_hover_state.cpp
+    src/engine/ui/state/ui_pressed_state.cpp
     src/game/scene/game_scene.cpp 
     src/game/data/session_data.cpp 
     src/game/component/player_component.cpp 

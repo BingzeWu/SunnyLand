@@ -6,3 +6,5 @@ build/
 # Executables
 *.exe
 *.pdb
+# 学习文件
+*.md

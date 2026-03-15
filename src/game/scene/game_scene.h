@@ -17,6 +17,7 @@ class UIlabel;
 class UIPanel;
 class UIImage;
 class UILabel;
+class UIButton;
 }
 
 namespace game::scene {
@@ -75,6 +76,7 @@ private:
     void createScoreUI(); ///< @brief 创建玩家得分UI
     void addScoreWithUI(int score); ///< @brief 增加分数并更新UI显示
     void updateHealthWithUI(); ///< @brief 更新玩家生命值UI显示
+    void createTestButton(); ///< @brief 创建按钮UI
 
 };
 

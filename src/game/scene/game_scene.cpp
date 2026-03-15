@@ -27,6 +27,7 @@
 #include "../../engine/ui/ui_label.h"
 #include "../../engine/ui/ui_image.h"
 #include "../../engine/ui/ui_panel.h"
+#include "../../engine/ui/ui_button.h"
 #include <string>
 #include <spdlog/spdlog.h>
 #include <SDL3/SDL_rect.h>
@@ -191,7 +192,7 @@ bool GameScene::initUI()
     if (!ui_manager_->init(glm::vec2(640.0f, 360.0f))) return false;
     createHealthUI();   // 创建生命值UI
     createScoreUI();    // 创建得分UI
-    // 创建一个半透明的红色UIPanel
+    createTestButton(); // 创建测试按钮UI
 
     return true;
 }
@@ -346,6 +347,21 @@ void GameScene::updateHealthWithUI()
         health_panel_->getChildren()[i]->setVisible(i - max_health < current_health);
     }
 }
+
+void GameScene::createTestButton()
+{
+    auto button = std::make_unique<engine::ui::UIButton>(
+        context_,
+        "assets/textures/UI/buttons/Start1.png",  // normal
+        "assets/textures/UI/buttons/Start2.png",  // hover
+        "assets/textures/UI/buttons/Start3.png",  // pressed
+        glm::vec2(100.0f, 100.0f), // position
+        glm::vec2(0.0f), // size (使用图片原始大小)
+        [this]() { spdlog::info("测试按钮被点击了！"); } // 点击回调
+    );
+    ui_manager_->addElement(std::move(button));
+}
+
 
 void GameScene::handleObjectCollisions()
 {
