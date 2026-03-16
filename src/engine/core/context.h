@@ -23,6 +23,7 @@ namespace engine::audio {
 }
 
 namespace engine::core {
+    class GameState;
 /**
  * @brief 持有对核心引擎模块引用的上下文对象。
  *
@@ -38,6 +39,7 @@ private:
     engine::resource::ResourceManager& resource_manager_;   ///< @brief 资源管理器
     engine::physics::PhysicsEngine& physics_engine_;        ///< @brief 物理引擎
     engine::audio::AudioPlayer& audio_player_;              ///< @brief 音频播放器
+    engine::core::GameState& game_state_;                   ///< @brief 游戏状态
 
 public:
     /**
@@ -54,7 +56,8 @@ public:
             engine::render::TextRenderer& text_renderer,
             engine::resource::ResourceManager& resource_manager,
             engine::physics::PhysicsEngine& physics_engine,
-            engine::audio::AudioPlayer& audio_player); // 添加 game_state 参数
+            engine::audio::AudioPlayer& audio_player,
+            engine::core::GameState& game_state); // 添加 game_state 参数
 
     // 禁止拷贝和移动，Context 对象通常是唯一的或按需创建/传递
     Context(const Context&) = delete;
@@ -70,6 +73,7 @@ public:
     engine::resource::ResourceManager& getResourceManager() const { return resource_manager_; } ///< @brief 获取资源管理器
     engine::physics::PhysicsEngine& getPhysicsEngine() const { return physics_engine_; }       ///< @brief 获取物理引擎
     engine::audio::AudioPlayer& getAudioPlayer() const { return audio_player_; }               ///< @brief 获取音频播放器
+    engine::core::GameState& getGameState() const { return game_state_; }                     ///< @brief 获取游戏状态
 };
 
 }

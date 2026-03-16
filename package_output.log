@@ -1,0 +1,194 @@
+========================================
+SunnyLand 游戏打包工具
+========================================
+
+[1/6] 清理旧的构建缓存...
+正在清理build目录...
+
+[2/6] 配置Release版本...
+-- Building for: Visual Studio 17 2022
+-- Selecting Windows SDK version 10.0.22000.0 to target Windows 10.0.26200.
+-- The C compiler identification is MSVC 19.38.33139.0
+-- The CXX compiler identification is MSVC 19.38.33139.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.38.33130/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting Target CPU Architecture
+-- Detecting Target CPU Architecture - X64
+-- Found nlohmann_json: C:/library/nlohmann_json/share/cmake/nlohmann_json/nlohmann_jsonConfig.cmake (found version "3.12.0") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE  
+-- Configuring done (5.7s)
+-- Generating done (0.0s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_BUILD_TYPE
+
+
+-- Build files have been written to: D:/Demo/SunnyLand/build
+
+[3/6] 编译Release版本...
+适用于 .NET Framework MSBuild 版本 17.10.4+10fbfbf2e
+
+  1>Checking Build System
+  Building Custom Rule D:/Demo/SunnyLand/CMakeLists.txt
+  main.cpp
+  game_app.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  config.cpp
+  time.cpp
+  context.cpp
+  game_state.cpp
+  texture_manager.cpp
+  font_manager.cpp
+  audio_manager.cpp
+  resource_manager.cpp
+  camera.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  renderer.cpp
+  text_renderer.cpp
+  animation.cpp
+  input_manager.cpp
+  game_object.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  audio_player.cpp
+  sprite_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  transform_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  parallax_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  正在生成代码...
+  正在编译...
+  tilelayer_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  physics_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  collider_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  animation_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  health_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  audio_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  scene_manager.cpp
+  scene.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  level_loader.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  physics_engine.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  collision.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  ui_manager.cpp
+  ui_element.cpp
+  ui_panel.cpp
+  ui_image.cpp
+  ui_label.cpp
+  ui_interactive.cpp
+  ui_button.cpp
+  ui_normal_state.cpp
+  ui_hover_state.cpp
+  正在生成代码...
+  正在编译...
+  ui_pressed_state.cpp
+  game_scene.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  helps_scene.cpp
+  title_scene.cpp
+  menu_scene.cpp
+D:\Demo\SunnyLand\src\game\scene\menu_scene.cpp(62,19): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  end_scene.cpp
+  session_data.cpp
+  player_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  player_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  jump_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  walk_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  fall_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  idle_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  hurt_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  dead_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  climb_state.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  ai_component.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  patrol_behavior.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  updown_behavior.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  jump_behavior.cpp
+D:\Demo\SunnyLand\src\engine\component\component.h(37,53): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\src\engine\component\component.h(44,48): warning C4100: “context”: 未引用的形参 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+  正在生成代码...
+spdlogd.lib(spdlog.obj) : error LNK2038: 检测到“_ITERATOR_DEBUG_LEVEL”的不匹配项: 值“2”不匹配值“0”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(spdlog.obj) : error LNK2038: 检测到“RuntimeLibrary”的不匹配项: 值“MDd_DynamicDebug”不匹配值“MD_DynamicRelease”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(bundled_fmtlib_format.obj) : error LNK2038: 检测到“_ITERATOR_DEBUG_LEVEL”的不匹配项: 值“2”不匹配值“0”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(bundled_fmtlib_format.obj) : error LNK2038: 检测到“RuntimeLibrary”的不匹配项: 值“MDd_DynamicDebug”不匹配值“MD_DynamicRelease”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(async.obj) : error LNK2038: 检测到“_ITERATOR_DEBUG_LEVEL”的不匹配项: 值“2”不匹配值“0”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(async.obj) : error LNK2038: 检测到“RuntimeLibrary”的不匹配项: 值“MDd_DynamicDebug”不匹配值“MD_DynamicRelease”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(color_sinks.obj) : error LNK2038: 检测到“_ITERATOR_DEBUG_LEVEL”的不匹配项: 值“2”不匹配值“0”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(color_sinks.obj) : error LNK2038: 检测到“RuntimeLibrary”的不匹配项: 值“MDd_DynamicDebug”不匹配值“MD_DynamicRelease”(main.obj 中) [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+LINK : warning LNK4098: 默认库“MSVCRTD”与其他库的使用冲突；请使用 /NODEFAULTLIB:library [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(spdlog.obj) : error LNK2019: 无法解析的外部符号 __imp__invalid_parameter，函数 "void * __cdecl std::_Allocate_manually_vector_aligned<struct std::_Default_allocate_traits>(unsigned __int64)" (??$_Allocate_manually_vector_aligned@U_Default_allocate_traits@std@@@std@@YAPEAX_K@Z) 中引用了该符号 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(bundled_fmtlib_format.obj) : error LNK2001: 无法解析的外部符号 __imp__invalid_parameter [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(async.obj) : error LNK2001: 无法解析的外部符号 __imp__invalid_parameter [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(color_sinks.obj) : error LNK2001: 无法解析的外部符号 __imp__invalid_parameter [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(spdlog.obj) : error LNK2019: 无法解析的外部符号 __imp__CrtDbgReport，函数 "void * __cdecl std::_Allocate_manually_vector_aligned<struct std::_Default_allocate_traits>(unsigned __int64)" (??$_Allocate_manually_vector_aligned@U_Default_allocate_traits@std@@@std@@YAPEAX_K@Z) 中引用了该符号 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(bundled_fmtlib_format.obj) : error LNK2001: 无法解析的外部符号 __imp__CrtDbgReport [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(async.obj) : error LNK2001: 无法解析的外部符号 __imp__CrtDbgReport [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(color_sinks.obj) : error LNK2001: 无法解析的外部符号 __imp__CrtDbgReport [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+spdlogd.lib(bundled_fmtlib_format.obj) : error LNK2019: 无法解析的外部符号 __imp__calloc_dbg，函数 "char * __cdecl std::_Maklocstr<char>(char const *,char *,struct _Cvtvec const &)" (??$_Maklocstr@D@std@@YAPEADPEBDPEADAEBU_Cvtvec@@@Z) 中引用了该符号 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+D:\Demo\SunnyLand\SunnyLand-Windows.exe : fatal error LNK1120: 3 个无法解析的外部命令 [D:\Demo\SunnyLand\build\SunnyLand-Windows.vcxproj]
+错误: 编译失败
+Press any key to continue . . . 

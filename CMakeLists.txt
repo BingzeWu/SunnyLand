@@ -28,6 +28,9 @@ find_package(glm REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(spdlog REQUIRED)
 
+# 强制使用spdlog的header-only模式（避免Debug/Release库冲突）
+add_compile_definitions(SPDLOG_HEADER_ONLY)
+
 # 添加可执行文件
 add_executable(
     ${TARGET} 
@@ -36,6 +39,7 @@ add_executable(
     src/engine/core/config.cpp  
     src/engine/core/time.cpp
     src/engine/core/context.cpp 
+    src/engine/core/game_state.cpp 
     src/engine/resource/texture_manager.cpp
     src/engine/resource/font_manager.cpp
     src/engine/resource/audio_manager.cpp 
@@ -72,6 +76,10 @@ add_executable(
     src/engine/ui/state/ui_hover_state.cpp
     src/engine/ui/state/ui_pressed_state.cpp
     src/game/scene/game_scene.cpp 
+    src/game/scene/helps_scene.cpp 
+    src/game/scene/title_scene.cpp 
+    src/game/scene/menu_scene.cpp 
+    src/game/scene/end_scene.cpp 
     src/game/data/session_data.cpp 
     src/game/component/player_component.cpp 
     src/game/component/state/player_state.cpp 
@@ -88,7 +96,7 @@ add_executable(
     src/game/component/ai/jump_behavior.cpp
     )
 
-# 链接库
+# 链接库（spdlog使用header-only模式，只需include不需链接）
 target_link_libraries(${TARGET}
                         ${SDL3_LIBRARIES}
                         SDL3_image::SDL3_image
@@ -96,8 +104,15 @@ target_link_libraries(${TARGET}
                         SDL3_ttf::SDL3_ttf
                         glm::glm
                         nlohmann_json::nlohmann_json
-                        spdlog::spdlog
                         )
+
+# spdlog使用header-only模式，手动添加include路径
+if(EXISTS "C:/library/spdlog/include")
+    target_include_directories(${TARGET} PRIVATE "C:/library/spdlog/include")
+else()
+    # 如果上述路径不存在，尝试使用find_package找到的路径
+    target_include_directories(${TARGET} PRIVATE ${spdlog_INCLUDE_DIRS})
+endif()
 
 #
 # if(MSVC)

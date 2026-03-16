@@ -1,5 +1,8 @@
 #include "game_app.h"
 #include "time.h"
+#include "config.h"
+#include "context.h"
+#include "game_state.h"
 #include "../resource/resource_manager.h"
 #include "../audio/audio_player.h"
 #include "../render/renderer.h"
@@ -12,9 +15,8 @@
 #include "../component/transform_component.h"
 #include "../component/physics_component.h"
 #include "../scene/scene_manager.h"
+#include "../../game/scene/title_scene.h"
 #include "../../game/scene/game_scene.h"
-#include "config.h"
-#include "context.h"
 #include <SDL3/SDL.h>
 #include <spdlog/spdlog.h>
 
@@ -62,12 +64,13 @@ bool GameApp::init() {
     if (!initAudioPlayer()) return false;
     if (!initInputManager()) return false;
     if (!initPhysicsEngine()) return false; 
+    if (!initGameState()) return false;
     if (!initContext()) return false;
     if (!initSceneManager()) return false;
 
 
     // 创建第一个场景并压入栈
-    auto scene = std::make_unique<game::scene::GameScene>(*context_, *scene_manager_);
+    auto scene = std::make_unique<game::scene::TitleScene>(*context_, *scene_manager_);
     scene_manager_->requestPushScene(std::move(scene));
 
     is_running_ = true;
@@ -256,6 +259,17 @@ bool GameApp::initPhysicsEngine()
     return true;
 }
 
+bool GameApp::initGameState()
+{
+    try {
+        game_state_ = std::make_unique<engine::core::GameState>(window_, sdl_renderer_);
+    } catch (const std::exception& e) {
+        spdlog::error("初始化游戏状态失败: {}", e.what());
+        return false;
+    }
+    return true;
+}
+
 bool GameApp::initContext()
 {
     try 
@@ -267,7 +281,8 @@ bool GameApp::initContext()
             *text_renderer_,
             *resource_manager_,
             *physics_engine_,
-            *audio_player_
+            *audio_player_,
+            *game_state_
             );
     } 
     catch (const std::exception& e) 
@@ -292,68 +307,5 @@ bool GameApp::initSceneManager()
 }
 
 // --- 测试用函数 ---
-
-void GameApp::testResourceManager()
-{
-    resource_manager_->getTexture("assets/textures/Actors/eagle-attack.png");
-    resource_manager_->getFont("assets/fonts/VonwaonBitmap-16px.ttf", 16);
-    resource_manager_->getSound("assets/audio/button_click.wav");
-
-    resource_manager_->unloadTexture("assets/textures/Actors/eagle-attack.png");
-    resource_manager_->unloadFont("assets/fonts/VonwaonBitmap-16px.ttf", 16);
-    resource_manager_->unloadSound("assets/audio/button_click.wav");
-}
-
-void GameApp::testRenderer()
-{
-    engine::render::Sprite sprite_world("assets/textures/Actors/frog.png");
-    engine::render::Sprite sprite_ui("assets/textures/UI/buttons/Start1.png");
-    engine::render::Sprite sprite_parallax("assets/textures/Layers/back.png");
-
-    static float rotation = 0.0f;
-    rotation += 0.1f;
-
-    // 注意渲染顺序
-    renderer_->drawParallax(*camera_, sprite_parallax, glm::vec2(100, 100), glm::vec2(0.5f, 0.5f), glm::bvec2(true, false));
-    renderer_->drawSprite(*camera_, sprite_world, glm::vec2(200, 200), glm::vec2(1.0f, 1.0f), rotation);
-    renderer_->drawUISprite(sprite_ui, glm::vec2(100, 100));
-
-}
-
-void GameApp::testCamera()
-{
-    auto key_state = SDL_GetKeyboardState(nullptr);
-    if (key_state[SDL_SCANCODE_UP]) camera_->move(glm::vec2(0, -1));   
-    if (key_state[SDL_SCANCODE_DOWN]) camera_->move(glm::vec2(0, 1));
-    if (key_state[SDL_SCANCODE_LEFT]) camera_->move(glm::vec2(-1, 0));
-    if (key_state[SDL_SCANCODE_RIGHT]) camera_->move(glm::vec2(1, 0));
-}
-
-void GameApp::testInputManager()
-{
-    std::vector<std::string> actions = {
-        "move_up",
-        "move_down",
-        "move_left",
-        "move_right",
-        "jump",
-        "attack",
-        "pause",
-        "MouseLeftClick",
-        "MouseRightClick"
-    };
-
-    for (const auto& action : actions) {
-        if (input_manager_->isActionPressed(action)) {
-            spdlog::info(" {} 按下 ", action);
-        }
-        if (input_manager_->isActionReleased(action)) {
-            spdlog::info(" {} 抬起 ", action);
-        }
-        if (input_manager_->isActionDown(action)) {
-            spdlog::info(" {} 按下中 ", action);
-        }
-    }
-}
 
 } // namespace engine::core

@@ -43,10 +43,10 @@ void Camera::move(const glm::vec2 &offset)
     clampPosition();
 }
 
-void Camera::setLimitBounds(const engine::utils::Rect& bounds)
+void Camera::setLimitBounds(const std::optional<engine::utils::Rect>& bounds)
 {
     limit_bounds_ = bounds;
-    clampPosition(); // 设置边界后，立即应用限制
+    clampPosition(); // 设置边界后，立即应用限制（如果传入nullopt则清除边界限制）
 }
 
 const glm::vec2& Camera::getPosition() const {

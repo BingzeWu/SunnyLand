@@ -13,11 +13,8 @@ namespace game::data {
 }
 
 namespace engine::ui {
-class UIlabel;
-class UIPanel;
-class UIImage;
-class UILabel;
-class UIButton;
+    class UILabel;
+    class UIPanel;
 }
 
 namespace game::scene {
@@ -77,6 +74,8 @@ private:
     void addScoreWithUI(int score); ///< @brief 增加分数并更新UI显示
     void updateHealthWithUI(); ///< @brief 更新玩家生命值UI显示
     void createTestButton(); ///< @brief 创建按钮UI
+    // 场景相关方法
+    void showEndScene(bool is_win); ///< @brief 显示游戏结束场景
 
 };
 

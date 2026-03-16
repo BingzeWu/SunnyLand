@@ -33,7 +33,7 @@ public:
     void setTarget(engine::component::TransformComponent* target);          ///< @brief 设置跟随目标变换组件
 
     void setPosition(const glm::vec2& position);                            ///< @brief 设置相机位置
-    void setLimitBounds(const engine::utils::Rect& bounds);                 ///< @brief 设置限制相机的移动范围
+    void setLimitBounds(const std::optional<engine::utils::Rect>& bounds);  ///< @brief 设置限制相机的移动范围，传入 std::nullopt 可清除边界
 
     const glm::vec2& getPosition() const;                                   ///< @brief 获取相机位置
     std::optional<engine::utils::Rect> getLimitBounds() const;              ///< @brief 获取限制相机的移动范围

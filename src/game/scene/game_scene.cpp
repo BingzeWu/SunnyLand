@@ -1,4 +1,6 @@
 #include "game_scene.h"
+#include "menu_scene.h"
+#include "end_scene.h"
 #include "../component/player_component.h"
 #include "../component/ai_component.h"
 #include "../component/ai/patrol_behavior.h"
@@ -14,6 +16,7 @@
 #include "../../engine/render/text_renderer.h"
 #include "../../engine/physics/physics_engine.h"
 #include "../../engine/core/context.h"
+#include "../../engine/core/game_state.h"
 #include "../../engine/object/game_object.h"
 #include "../../engine/audio/audio_player.h"
 #include "../../engine/component/transform_component.h"
@@ -74,6 +77,8 @@ void GameScene::init()
         spdlog::error("UI初始化失败...");
         return;
     }
+    //游戏状态设置为Playing
+    context_.getGameState().setState(engine::core::State::Playing);
     //设置音量
     context_.getAudioPlayer().setMusicVolume(0.2f);
     context_.getAudioPlayer().setSoundVolume(0.5f);
@@ -94,6 +99,7 @@ void GameScene::update(float delta_time) {
         player_->getComponent<game::component::PlayerComponent>()->setIsDead(true);
         spdlog::debug("玩家掉出地图下方，游戏失败");
         //TODO: 掉落死亡逻辑处理
+        showEndScene(false);
     }
 }
 
@@ -102,7 +108,12 @@ void GameScene::render() {
 }
 
 void GameScene::handleInput() {
-    Scene::handleInput();  
+    Scene::handleInput();
+    // 检查暂停动作
+    if (context_.getInputManager().isActionPressed("pause")) {
+        spdlog::debug("在GameScene中检测到暂停动作，正在推送MenuScene。");
+        scene_manager_.requestPushScene(std::make_unique<MenuScene>(context_, scene_manager_, game_session_data_));
+    }  
 }
 
 void GameScene::clean() {
@@ -192,8 +203,6 @@ bool GameScene::initUI()
     if (!ui_manager_->init(glm::vec2(640.0f, 360.0f))) return false;
     createHealthUI();   // 创建生命值UI
     createScoreUI();    // 创建得分UI
-    createTestButton(); // 创建测试按钮UI
-
     return true;
 }
 
@@ -362,6 +371,13 @@ void GameScene::createTestButton()
     ui_manager_->addElement(std::move(button));
 }
 
+void GameScene::showEndScene(bool is_win)
+{
+    spdlog::debug("显示结束场景，游戏 {}", is_win ? "胜利" : "失败");
+    game_session_data_->setIsWin(is_win);
+    auto end_scene = std::make_unique<game::scene::EndScene>(context_, scene_manager_, game_session_data_);
+    scene_manager_.requestPushScene(std::move(end_scene));
+}
 
 void GameScene::handleObjectCollisions()
 {
@@ -397,6 +413,12 @@ void GameScene::handleObjectCollisions()
             toNextLevel(objB);
         } else if (objB->getName() == "player" && objA->getTag() == "next_level") {
             toNextLevel(objA);
+        }
+        // 玩家与胜利触发器碰撞
+        if (objA->getName() == "player" && objB->getTag() == "win") {
+            showEndScene(true);
+        } else if (objB->getName() == "player" && objA->getTag() == "win") {
+            showEndScene(true);
         }
     }
 
