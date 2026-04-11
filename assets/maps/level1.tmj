@@ -126,8 +126,8 @@
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":59.5075757575768,
-                 "y":155.795454545455
+                 "x":74.1742424242437,
+                 "y":156.462121212122
                 }, 
                 {
                  "gid":607,
@@ -212,6 +212,18 @@
                  "width":15,
                  "x":912,
                  "y":96
+                }, 
+                {
+                 "gid":612,
+                 "height":13,
+                 "id":20,
+                 "name":"gem",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":914,
+                 "y":346
                 }, 
                 {
                  "gid":611,
@@ -325,6 +337,90 @@
                  "width":0,
                  "x":87,
                  "y":43
+                }, 
+                {
+                 "gid":612,
+                 "height":13,
+                 "id":21,
+                 "name":"gem",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":933,
+                 "y":345.666666666667
+                }, 
+                {
+                 "gid":612,
+                 "height":13,
+                 "id":22,
+                 "name":"gem",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":983,
+                 "y":377.666666666667
+                }, 
+                {
+                 "gid":612,
+                 "height":13,
+                 "id":23,
+                 "name":"gem",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":1005.66666666667,
+                 "y":379
+                }, 
+                {
+                 "gid":612,
+                 "height":13,
+                 "id":24,
+                 "name":"gem",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":983,
+                 "y":356.333333333333
+                }, 
+                {
+                 "gid":612,
+                 "height":13,
+                 "id":25,
+                 "name":"gem",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":1005,
+                 "y":355.666666666667
+                }, 
+                {
+                 "gid":611,
+                 "height":21,
+                 "id":26,
+                 "name":"fruit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":21,
+                 "x":646,
+                 "y":320.333333333333
+                }, 
+                {
+                 "gid":611,
+                 "height":21,
+                 "id":27,
+                 "name":"fruit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":21,
+                 "x":778.666666666667,
+                 "y":318.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -345,7 +441,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":20,
+ "nextobjectid":29,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

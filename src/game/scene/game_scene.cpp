@@ -416,8 +416,10 @@ void GameScene::handleObjectCollisions()
         }
         // 玩家与胜利触发器碰撞
         if (objA->getName() == "player" && objB->getTag() == "win") {
+            spdlog::info("玩家 {} 到达胜利触发器", player_->getName());
             showEndScene(true);
         } else if (objB->getName() == "player" && objA->getTag() == "win") {
+            spdlog::info("玩家 {} 到达胜利触发器", player_->getName());
             showEndScene(true);
         }
     }
@@ -449,9 +451,8 @@ void GameScene::handlePlayerDamage(int damage)
     updateHealthWithUI();
     if (player_component->isDead()) {
         spdlog::info("玩家 {} 死亡", player_->getName());
-        // TODO: 可能的死亡逻辑处理
+        showEndScene(false);
     }
-    // TODO:更新生命值及HealthUI
 }
 
 void GameScene::playerVSEnemyCollision(engine::object::GameObject *player, engine::object::GameObject *enemy)
