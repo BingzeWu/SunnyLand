@@ -4,7 +4,7 @@ SunnyLand.code-workspace
 # build
 build/
 # Executables
-!SunnyLand_Release\SunnyLand-Windows.exe
+!SunnyLand_Release/SunnyLand-Windows.exe
 *.exe
 *.pdb
 # 学习文件
